@@ -247,7 +247,7 @@ try {
 
 ## API
 
-The root export provides:
+Tau's root export is its complete stable surface. It intentionally provides:
 
 - `render(options, defaultFilters?)`
 - `compileToFunction(template, filePath?)`
@@ -256,7 +256,8 @@ The root export provides:
 - `getTauCacheStats()`
 - `clearTauCache()`
 - `TauError` and `formatTauError`
-- the related TypeScript types
+- `CompiledTemplateFn`, `FilterFunction`, `TauCacheStats`, `TauErrorCode`,
+  `TauErrorLocation`, `TauHelpers`, `TauLimits`, and `TauOptions`
 
 The parser and expression modules are also available through the package
 subpaths:
@@ -265,6 +266,10 @@ subpaths:
 import { TauParser } from "jsr:@steno/tau/parser";
 import { compileExpression } from "jsr:@steno/tau/expression";
 ```
+
+Those two subpaths and the root are Tau's only public import paths. Do not import files under
+`src/` directly. The complete root export list is compatibility-tested, so adding, removing, or
+renaming an export is a public API change.
 
 `compileToFunction` is useful when a host needs to compile a template directly.
 Use `render` for normal rendering so Tau can create the bounded, per-render
